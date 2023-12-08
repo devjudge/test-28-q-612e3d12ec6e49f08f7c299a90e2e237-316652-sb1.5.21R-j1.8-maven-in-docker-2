@@ -1,0 +1,24 @@
+tasks:
+  - before: |
+      wget -qOdatabase-setup.sh https://codejudge-starter-repo-artifacts.s3.ap-south-1.amazonaws.com/gitpod/backend/java/1.8/gitpod-setup.sh
+      chmod 0755 database-setup.sh
+      bash database-setup.sh
+    init: mvn clean install
+    command: java -jar ./target/spring-boot-in-docker.jar
+ports:
+  - port: 8080
+    name: "Backend Server"
+    onOpen: open-browser
+    visibility: public
+  - port: 3306
+    name: "MySQL Server"
+    onOpen: ignore
+    visibility: public
+  - port: 27017
+    name: "MongoDB Server"
+    onOpen: ignore
+    visibility: public
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+    - gabrielbb.vscode-lombok
